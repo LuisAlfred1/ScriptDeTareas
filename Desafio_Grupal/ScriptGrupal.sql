@@ -16,8 +16,7 @@ GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
 ORDER BY Total_De_Gastos DESC;
 
 --Aqui verifiqué que hay registros solo del año 2021.
-SELECT fecha_venta FROM sell.ventas 
-WHERE YEAR(fecha_venta) = '2021'
+SELECT MAX(fecha_venta) FROM sell.ventas 
 
 
 /*
@@ -45,6 +44,7 @@ WHERE dv.producto_id IS NULL;
 🔹 Reto 4 – Productos con mejor desempeño en stock
     Mostrar los productos que han vendido más del 50% de su stock actual.
 */
+
 SELECT 
     p.producto_id,
     p.nombre_producto,
