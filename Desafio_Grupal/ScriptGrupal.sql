@@ -16,7 +16,7 @@ GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
 ORDER BY Total_De_Gastos DESC;
 
 --Aqui verifiqué que hay registros solo del año 2021.
-SELECT MAX(fecha_venta) FROM sell.ventas 
+SELECT MAX(fecha_venta) FROM sell.ventas
 
 
 /*
