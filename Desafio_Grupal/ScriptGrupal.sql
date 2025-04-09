@@ -11,7 +11,7 @@ SELECT TOP 5
     SUM(V.total_venta) AS Total_De_Gastos
 FROM cli.clientes c 
 JOIN sell.ventas v on c.cliente_id = v.cliente_id
-WHERE YEAR(V.fecha_venta) = YEAR(GETDATE()) - 4  --Año 2021 // Inge, la BD de Ecommerce tiene registros del año 2021 de 2022 - 2025 no hay registros 
+WHERE YEAR(V.fecha_venta) = YEAR(GETDATE()) - 4  --Año 2021 // Inge, la BD de Ecommerce tiene registros del año 2021. De 2022 - 2025 no hay registros 
 GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
 ORDER BY Total_De_Gastos DESC;
 
