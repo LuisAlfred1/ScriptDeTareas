@@ -15,7 +15,7 @@ WHERE YEAR(V.fecha_venta) = YEAR(GETDATE()) - 4  --Año 2021 // Inge, la BD de E
 GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
 ORDER BY Total_De_Gastos DESC;
 
---Aqui verifiqué que hay registros solo del año 2021
+--Aqui verifiqué que hay registros solo del año 2021.
 SELECT fecha_venta FROM sell.ventas 
 WHERE YEAR(fecha_venta) = '2021'
 
