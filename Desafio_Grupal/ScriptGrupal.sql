@@ -46,7 +46,7 @@ FROM sell.detalle_ventas AS dv --Aqui la seleccion de la tabla de detalles venta
 JOIN sell.ventas AS v ON dv.venta_id = v.venta_id --Aqui se hace un Join para unir las tablas de detalle ventas y la de ventas 
 GROUP BY v.fecha_venta  --Aqui agrupo la fecha venta 
 ORDER BY productos_vendidos DESC --Aqui ordeno los resutltados de la consulta de forma descendente de Mayor a Menor
-
+GO
 
 /*
 🔹 Reto 4 – Productos con mejor desempeño en stock
@@ -78,3 +78,4 @@ LEFT JOIN sell.ventas v ON c.cliente_id = v.cliente_id --Aqui hago un left Join 
 WHERE v.venta_id IS NULL --Aqui es para que muestre solo los datos que son Nulos
 GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido) --Aqui agrupo al cliente_id y la concatenacion del nombre y apellido del cliente
 Order BY c.cliente_id DESC --Aqui ordeno el cliente id de forma Descendente de Mayor a menor
+GO
