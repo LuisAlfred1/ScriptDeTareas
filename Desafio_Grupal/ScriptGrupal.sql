@@ -16,8 +16,8 @@ GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
 ORDER BY Total_De_Gastos DESC;
 
 --Aqui verifiqué que hay registros solo del año 2021.
-SELECT MAX(fecha_venta) FROM sell.ventas
-
+SELECT fecha_venta FROM sell.ventas 
+WHERE YEAR(fecha_venta) = '2021'
 
 /*
 🔹 Reto 2 – Categorías sin productos vendidos
@@ -37,6 +37,14 @@ WHERE dv.producto_id IS NULL;
    Listar los 3 días con más cantidad de productos vendidos (sumando todas las ventas del día).
 */
 
+SELECT 
+	TOP 3
+	v.fecha_venta,
+	SUM(dv.cantidad) productos_vendidos
+FROM sell.detalle_ventas AS dv
+JOIN sell.ventas AS v ON dv.venta_id = v.venta_id
+GROUP BY v.fecha_venta
+ORDER BY productos_vendidos DESC
 
 
 
@@ -60,3 +68,13 @@ HAVING SUM(dv.cantidad) > (p.stock * 0.5);
 🔹 Reto 5 – Clientes sin compras pero con carritos
     Encontrar los clientes que no han realizado ninguna compra, pero tienen al menos un carrito creado.
 */
+
+SELECT 
+	c.cliente_id,
+	CONCAT(c.nombre,' ',c.apellido) as Cliente
+FROM cli.clientes AS c
+JOIN sell.carrito_compras AS ca ON c.cliente_id = ca.cliente_id
+LEFT JOIN sell.ventas v ON c.cliente_id = v.cliente_id
+WHERE v.venta_id IS NULL
+GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
+Order BY c.cliente_id 
