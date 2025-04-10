@@ -39,13 +39,14 @@ WHERE dv.producto_id IS NULL; --aqui la condición de que si el producto_id es n
 */
 
 SELECT 
-	TOP 3
-	v.fecha_venta,
-	SUM(dv.cantidad) productos_vendidos
-FROM sell.detalle_ventas AS dv
-JOIN sell.ventas AS v ON dv.venta_id = v.venta_id
-GROUP BY v.fecha_venta
-ORDER BY productos_vendidos DESC
+	TOP 3 --Aqui selecciono los primeros 3 datos de la tabla
+	v.fecha_venta, --Aqui la fecha de venta de la tabla de venta
+	SUM(dv.cantidad) AS productos_vendidos --Aqui hago la suma para la cantidad de productos vendidos 
+FROM sell.detalle_ventas AS dv --Aqui la seleccion de la tabla de detalles ventas
+JOIN sell.ventas AS v ON dv.venta_id = v.venta_id --Aqui se hace un Join para unir las tablas de detalle ventas y la de ventas 
+GROUP BY v.fecha_venta  --Aqui agrupo la fecha venta 
+ORDER BY productos_vendidos DESC --Aqui ordeno los resutltados de la consulta de forma descendente de Mayor a Menor
+GO;
 
 
 /*
@@ -70,11 +71,12 @@ HAVING SUM(dv.cantidad) > (p.stock * 0.5); -- Y aqui utilizo el Having despues d
 */
 
 SELECT 
-    c.cliente_id,
-    CONCAT(c.nombre,' ',c.apellido) as Cliente
-FROM cli.clientes AS c
-JOIN sell.carrito_compras AS ca ON c.cliente_id = ca.cliente_id
-LEFT JOIN sell.ventas v ON c.cliente_id = v.cliente_id
-WHERE v.venta_id IS NULL
-GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido)
-Order BY c.cliente_id 
+	c.cliente_id, --aqui selecciono el id del cliente
+	CONCAT(c.nombre,' ',c.apellido) as Cliente --Aqui concateno el nombre y el apellido del cliente
+FROM cli.clientes AS c --aqui se dice de que tabla se esta haciendo las consultas que es la de clientes
+JOIN sell.carrito_compras AS ca ON c.cliente_id = ca.cliente_id --aqui hago un Join para unir la tabla de carrito compras y cliente 
+LEFT JOIN sell.ventas v ON c.cliente_id = v.cliente_id --Aqui hago un left Join para que me muestre las ventas de la tabla ventas de los cliente id
+WHERE v.venta_id IS NULL --Aqui es para que muestre solo los datos que son Nulos
+GROUP BY c.cliente_id, CONCAT(c.nombre,' ',c.apellido) --Aqui agrupo al cliente_id y la concatenacion del nombre y apellido del cliente
+Order BY c.cliente_id DESC --Aqui ordeno el cliente id de forma Descendente de Mayor a menor
+GO;
