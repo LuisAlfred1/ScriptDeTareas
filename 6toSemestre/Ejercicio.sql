@@ -66,7 +66,7 @@ begin
 		u.unidad_medida,
 		COUNT(p.producto_id)
 	from inv.unidad_medida as u
-	join inv.producto as p on u.um_id = p.um_recepcion_id
+	join inv.producto as p on u.um_id = p.um_recepcion_id --Utilicé el um_id de recepción
 	group by u.um_id, u.unidad_medida
 	order by COUNT(p.producto_id) desc
 	return;
