@@ -1,5 +1,5 @@
 -- EJERCICIOS --
-
+USE Ecommerce
 --Ejercicio 1: Crear las siguientes tablas
 CREATE TABLE sell.proveedores(
     proveedor_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
