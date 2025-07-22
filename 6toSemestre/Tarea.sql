@@ -78,7 +78,7 @@ begin
 		p.stock,
 		p.precio_unitario_entrega
 	from inv.producto as p
-	join inv.unidad_medida as u on u.um_id = p.um_recepcion_id
+	join inv.unidad_medida as u on u.um_id = p.um_recepcion_id --Utilicé el id um de recepción
 	where u.unidad_medida = @UnidadDeMedida
 
 	return;
