@@ -14,7 +14,7 @@ GO
 CREATE LOGIN finance_login WITH PASSWORD = 'finance@789!'
 GO 
 
---Usando la base de datos company_db
+--Usando la base de datos company_db para crear los usuarios
 USE company_db
 
 --Creando usuarios con sus respectivos Logins en la bd company_db
@@ -47,7 +47,12 @@ GO
 EXEC sp_addrolemember rol_finance, finance_user
 GO
 
---Asignandole permisos especificos a cada Rol
+--Asignandole permisos especificos a cada Rol--
+--Para el rol_admin
+--Tiene el control total de la Base de datos
+GRANT CONTROL ON DATABASE::company_db TO rol_admin
+GO
+
 --Para el rol_hr
 --Puede leer y modificar datos en el esquema hr
 GRANT SELECT, INSERT ON SCHEMA::hr TO rol_hr
@@ -56,10 +61,10 @@ GO
 --Para el rol_finance
 -- Le permite leer (SELECT) cualquier tabla dentro del esquema finance
 GRANT SELECT ON SCHEMA::finance TO rol_finance;
-
+GO
 --Le permite insertar únicamente en la tabla finance.expenses
 GRANT INSERT ON OBJECT::finance.expenses TO rol_finance;
-
+GO
 
 /*
 Con esto nos aseguramos que solo pueda leer las tablas del esquema y que solo pueda insertar datos en 
@@ -68,7 +73,7 @@ en una tabla especifica del esquema.
 
 --Demostración
 EXECUTE AS USER = 'finance_user'
-
+GO
 --Permisos concedidos
 INSERT INTO finance.expenses ([description],amount,expense_date) VALUES ('Nueva descript',400,CURRENT_TIMESTAMP)
 
