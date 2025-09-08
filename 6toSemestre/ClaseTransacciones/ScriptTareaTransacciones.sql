@@ -6,7 +6,8 @@
 ================================================================================
 */
 
-/* ---------- Objetos auxiliares: historial de precios y antifraude ---------- */
+/* ---------- Creando objetos auxiliares:  y antifraude ---------- */
+--Tabla precio_historial
 IF OBJECT_ID('sell.precio_historial') IS NULL
 BEGIN
   CREATE TABLE sell.precio_historial(
@@ -20,8 +21,10 @@ BEGIN
 END
 GO
 
+--Esquema fraude
 IF SCHEMA_ID('fraude') IS NULL EXEC('CREATE SCHEMA fraude');
 GO
+--Tabla fraude.operaciones
 IF OBJECT_ID('fraude.operaciones') IS NULL
 BEGIN
   CREATE TABLE fraude.operaciones(
