@@ -1,0 +1,59 @@
+--1) Creando la colección
+db.createCollection("orders")
+
+--2) Insertando ordenes
+db.orders.insertMany([
+  { orderNumber:1, 
+    customerId: ObjectId("68f6999ae69d96857e4e1b10"),
+    createdAt: new Date(),
+    items: [
+    { productoId: ObjectId("68f6a1e0e69d96857e4e1b12"),
+    	name: "Teclado",
+      quantity: 3,
+      unitPrice: 100,
+    }
+  ],
+  total: 300 
+  }
+])
+
+db.orders.insertMany([
+  { orderNumber:2, 
+    customerId: ObjectId("68f6999ae69d96857e4e1b10"),
+    createdAt: new Date(),
+    items: [
+    { productoId: ObjectId("68f6a1e0e69d96857e4e1b13"),
+    	name: "Mouse",
+      quantity: 2,
+      unitPrice: 90.5,
+    }
+  ],
+  total: 2*90.5
+  }
+])
+
+db.orders.insertMany([
+  { orderNumber:3, 
+    customerId: ObjectId("68f6999ae69d96857e4e1b10"),
+    createdAt: new Date(),
+    items: [
+    { productoId: ObjectId("68f6a1e0e69d96857e4e1b12"),
+    	name: "Teclado",
+      quantity: 2,
+      unitPrice: 100,
+    }
+  ],
+  total: 2*100
+  }
+])
+
+--3) Obteniendo las ordenes con total mayor a 100
+db.orders.find({
+  total: { $gt: 100}
+})
+
+--4) Obteniendo los productos de una orden
+db.orders.find(
+  {orderNumber: 1},
+  {items: 1}
+)
